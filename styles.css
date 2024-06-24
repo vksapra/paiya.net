@@ -1,4 +1,5 @@
-﻿body {
+﻿/* Base styles */
+body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -10,18 +11,26 @@
 
 header {
     background-color: rgba(217, 182, 60, 0.9); /* Slightly transparent to see the background */
-    padding: 10px 20px;
+    padding: auto;
     position: fixed; /* Fixed to make it sticky */
     top: 0;
     width: 100%;
+    align-items: flex-end; /* Align items to the bottom */
     z-index: 1000;
     transition: all 0.3s ease; /* Smooth transition */
 }
 
 .header-container {
     display: flex;
-    align-items: center;
+    align-items: center; /* Align items to the bottom */
     justify-content: space-between;
+    flex-direction: column;
+}
+
+header.scrolled .header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end; /* Align items to the bottom */
 }
 
 .logo {
@@ -31,20 +40,28 @@ header {
 }
 
 header.scrolled .logo {
-    width: 100px; /* Smaller logo on scroll */
+    width: 100px; /* Keep the same size */
     margin-bottom: 0;
+    margin-left: 20px;
+
 }
 
 .search-container {
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: all 0.3s ease;
+}
+
+header.scrolled .search-container {
+    width: 100%; /* Adjust width on scroll */
+    justify-content: flex-start; /* Align search bar next to logo */
+    margin-bottom: 0;
 }
 
 #searchBar {
-    padding: 10px;
+    padding: 15px;
     font-size: 16px;
     width: 100%;
     max-width: 600px;
@@ -52,9 +69,17 @@ header.scrolled .logo {
     border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.8);
     color: #000;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: width 0.3s ease;
+    margin-left: 20px; /* Space between logo and search bar */
+    box-sizing: border-box;
 }
 
+header.scrolled #searchBar {
+    position: relative;
+    width: auto; /* Adjusted width */
+    max-width: calc(100% - 240px); /* Adjusted max-width based on other elements */
+    padding: 10px; /* Optional padding for spacing inside the searchBar */
+}
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -71,8 +96,15 @@ header.scrolled .logo {
 }
 
 nav {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align items to the bottom */
     width: 100%;
     transition: all 0.3s ease; /* Smooth transition */
+}
+
+header.scrolled nav {
+    justify-content: flex-end; /* Move nav to the right on scroll */
 }
 
 .menu {
@@ -129,7 +161,7 @@ nav {
 main {
     padding: 20px;
     text-align: center;
-    margin-top: 100px; /* Adjust for fixed header */
+    margin-top: 150px; /* Adjusted for fixed header and search bar */
 }
 
 .content {
@@ -148,7 +180,6 @@ article {
     color: #000;
 }
 
-
 article h2 {
     font-weight: 600;
 }
@@ -165,27 +196,52 @@ footer {
 
 /* Mobile specific styles */
 @media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .search-container {
-        width: 60%;
+        width: auto;
+        order: 2; /* Ensure the search bar is at the bottom */
     }
 
     #searchBar {
-        width: 225px; 
+        width: 450px; 
+        font-size: 14px;
     }
 
     header.scrolled .search-container {
-        width: 40%;
+        width: auto;
+        order: 2;
+        align-self: flex-end; /* Align search bar to the bottom right */
     }
 
     header.scrolled #searchBar {
-        width: 100px; 
-        font-size: 12px;
+        width: auto;
+        font-size: 14px;
+        margin-right: 1050px; /* Add margin to move it away from the edge */
+        align-self: right;
+    }
+
+    .logo {
+        order: 1; 
+        margin-top: 10px;
+    }
+
+    header.scrolled .logo {
+        width: 150px;
+        order: 1;
+        align-self: right; /* Center the logo horizontally */
+        margin-bottom: 0%;
+        margin-left: 50px;
     }
 
     .menu {
         flex-direction: column;
         align-items: center;
-        gap: 5px;
+        gap: 10px;
+        order: 3; /* Ensure the menu is at the bottom */
     }
 
     .menu-item {
