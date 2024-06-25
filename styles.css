@@ -154,6 +154,11 @@ header.scrolled nav {
     color: #ffffff;
 }
 
+
+.dropdown a 
+{
+    text-decoration: none;
+}
 .menu-item:hover .dropdown {
     display: block;
 }
@@ -163,6 +168,68 @@ main {
     text-align: center;
     margin-top: 150px; /* Adjusted for fixed header and search bar */
 }
+
+
+.restaurant-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.restaurant-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.restaurant-info {
+    margin-top: 15px;
+}
+
+.restaurant-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.restaurant-category {
+    background-color: #D9B63C;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.restaurant-name {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.restaurant-location {
+    font-size: 1em;
+    margin: 10px 0;
+    color: #666;
+}
+
+.restaurant-description {
+    font-size: 1em;
+    color: #666;
+}
+
+.restaurant-contact a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .content {
     display: flex;

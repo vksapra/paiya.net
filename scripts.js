@@ -67,4 +67,51 @@ function loadTranslations(lang) {
                 el.textContent = data[el.getAttribute('data-translate')];
             });
         });
+
+
+function initializeCarousels() {
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        const images = carousel.getElementsByClassName('restaurant-image');
+        const dotsContainer = carousel.querySelector('.carousel-dots');
+        
+        for (let i = 0; i < images.length; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => showSlide(carousel, i));
+            dotsContainer.appendChild(dot);
+        }
+
+        showSlide(carousel, 0); // Initialize the first slide
+    });
 }
+
+function showSlide(carousel, index) {
+    const images = carousel.getElementsByClassName('restaurant-image');
+    const dots = carousel.getElementsByClassName('dot');
+    
+    for (let i = 0; i < images.length; i++) {
+        images[i].style.display = 'none';
+        dots[i].classList.remove('active');
+    }
+
+    images[index].style.display = 'block';
+    dots[index].classList.add('active');
+}
+
+function nextSlide(button) {
+    const carousel = button.parentElement;
+    const images = carousel.getElementsByClassName('restaurant-image');
+    const currentIndex = Array.from(images).findIndex(image => image.style.display === 'block');
+    const nextIndex = (currentIndex + 1) % images.length;
+    showSlide(carousel, nextIndex);
+}
+
+function prevSlide(button) {
+    const carousel = button.parentElement;
+    const images = carousel.getElementsByClassName('restaurant-image');
+    const currentIndex = Array.from(images).findIndex(image => image.style.display === 'block');
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    showSlide(carousel, prevIndex);
+}
+}
+
