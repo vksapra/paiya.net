@@ -17,6 +17,36 @@ mobileMenu.addEventListener('click', function() {
     nav.classList.toggle('active');
 });
 
+const menuItems = document.querySelectorAll('.menu-item');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        // Toggle active class on the clicked menu item
+        item.classList.toggle('active');
+
+        // Hide other dropdowns except the one clicked
+        menuItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+    });
+});
+
+// Close dropdowns if clicked outside
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.menu-item')) {
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+        });
+    }
+});
+
+// Prevent dropdown from closing when clicked inside
+document.querySelector('nav').addEventListener('click', function(event) {
+    event.stopPropagation();
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     var userLang = navigator.language || navigator.userLanguage; 
     var lang = userLang.split('-')[0]; 
